@@ -28,14 +28,14 @@ exports.adminLogin = (req, res) => {
     } = req.body;
 
     if (!email || !password) {
-        return res.status(400).render('../views/index.hbs', {
+        return res.status(400).render('index', {
             message: 'Please enter your Email and Password'
         });
     }
     database.query(`select * from admin where email = ?`, [email], async (err, results) => {
 
         if (results.length === 0 || password !== results[0].password) {
-            res.status(401).render('../views/index.hbs', {
+            res.status(401).render('index', {
                 message: 'Email or Password is incorrect'
             });
         } else {
@@ -60,10 +60,7 @@ exports.adminLogin = (req, res) => {
                 if (err) {
                     throw err;
                 } else {
-                    res.render('../views/dashboard.hbs', {
-                        title: 'Enrollees',
-                        student: results
-                    });
+                    res.redirect('/auth/dashboard');
                 }
             });
         }
@@ -76,7 +73,7 @@ exports.dashboard = (req, res) => {
         if (err) {
             throw err;
         } else {
-            return res.render('../views/dashboard.hbs', {
+            return res.render('dashboard', {
                 title: 'Enrollees',
                 student: results
             });
@@ -90,7 +87,7 @@ exports.register = (req, res) => {
         if (err) {
             throw err;
         } else {
-            res.render('../views/registration.hbs', {
+            res.render('registration', {
                 title: 'Enrollees',
                 student: results
             });
@@ -112,15 +109,15 @@ exports.registerStudent = (req, res) => {
         if (err) {
             throw err;
         } else if (results.length > 0) {
-            return res.render('../views/registration.hbs', {
+            return res.render('registration', {
                 message: 'Email entered is already in use'
             });
         } else if (password !== confirmPassword) {
-            return res.render('../views/registration.hbs', {
+            return res.render('registration', {
                 message: 'Password entered do not match'
             });
         } else if (fName === "" || lName === "" || email === "") {
-            return res.render('../views/registration.hbs', {
+            return res.render('registration', {
                 message: 'Please Complete the Form'
             });
         } else {
@@ -138,7 +135,7 @@ exports.registerStudent = (req, res) => {
                 if (err) {
                     throw err;
                 } else {
-                    return res.render('../views/registration.hbs', {
+                    return res.render('registration', {
                         messageSuccess: 'User Registered Successfully!',
                     });
                 }
@@ -150,11 +147,11 @@ exports.registerStudent = (req, res) => {
 //Student update export
 exports.update = (req, res) => {
     const email = req.params.email;
-    database.query(`select * from student where email = ?`, [email], (err, results) => {
+    database.query(`select studentId, fName, lName, email from student where email = ?`, [email], (err, results) => {
         if (err) {
             throw err;
         } else {
-            return res.render('../views/update.hbs', {
+            return res.render('update', {
                 title: 'Edit User',
                 student: results[0]
             });
@@ -177,7 +174,7 @@ exports.updateUser = (req, res) => {
                 if (err) {
                     throw err;
                 } else {
-                    return res.render('../views/dashboard.hbs', {
+                    return res.render('dashboard', {
                         student: results
                     });
                 }
@@ -193,7 +190,7 @@ exports.delete = (req, res) => {
         if (err) {
             throw err;
         } else {
-            return res.render('../views/delete.hbs', {
+            return res.render('delete', {
                 title: 'Delete User Information',
                 student: results[0]
             })
@@ -204,16 +201,29 @@ exports.delete = (req, res) => {
 exports.deleteUser = (req, res) => {
     const {
         studentId,
+        confirmUserId,
     } = req.body;
-    database.query(`delete from student where studentId="${studentId}"`, (err) => {
+    database.query(`delete from student where studentId="${confirmUserId}"`, (err, results) => {
         if (err) {
             throw err;
+        } else if (studentId !== confirmUserId) {
+            database.query(`select studentId, fName, lName, email from student where studentId = ${studentId}`, (err, results) => {
+                if (err) {
+                    throw err;
+                } else {
+                    return res.render('delete', {
+                        title: 'Delete User Information',
+                        message: 'Confirmed User ID do not match',
+                        student: results[0]
+                    });
+                }
+            });
         } else {
             database.query(`select * from student`, (err, results) => {
                 if (err) {
                     throw err;
                 } else {
-                    return res.render('../views/dashboard.hbs', {
+                    return res.render('dashboard', {
                         student: results
                     });
                 }

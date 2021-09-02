@@ -17,7 +17,7 @@
             <div class="mb-3 col-lg-12">
                 <label for="studentId" class="form-label">User ID</label>
                 <input type="text" class="form-control" name="studentId" id="studentId" aria-describedby="Student Id"
-                    value={{student.studentId}} disabled>
+                    value="{{student.studentId}}" readonly>
             </div>
         </div>
 
@@ -25,13 +25,13 @@
             <div class="mb-3 col-lg-6">
                 <label for="fName" class="form-label">First Name</label>
                 <input type="text" class="form-control" name="fName" id="fName" aria-describedby="First Name"
-                    value={{student.fName}} readonly>
+                    value="{{student.fName}}" readonly>
             </div>
 
             <div class="mb-3 col-lg-6">
                 <label for="lName" class="form-label">Last Name</label>
                 <input type="text" class="form-control" name="lName" id="lName" aria-describedby="Last Name"
-                    value={{student.lName}} readonly>
+                    value="{{student.lName}}" readonly>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
             <div class="mb-3 col-lg-12">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" name="email" id="email" aria-describedby="email"
-                    value={{student.email}} readonly>
+                    value="{{student.email}}" readonly>
             </div>
         </div>
 
@@ -47,7 +47,7 @@
             <div class="mb-3 col-lg-12">
                 <label for="confirmUserId" class="form-label">Please Confirm your User ID</label>
                 <input type="text" class="form-control" name="confirmUserId" id="confirmUserId"
-                    aria-describedby="Confirm User ID">
+                    aria-describedby="Confirm User ID" required>
             </div>
         </div>
 

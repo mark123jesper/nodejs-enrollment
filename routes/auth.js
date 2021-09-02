@@ -7,8 +7,10 @@ router.get('/dashboard', registrationController.dashboard);
 
 router.get('/register', registrationController.register);
 router.post('/registerStudent', registrationController.registerStudent);
+
 router.get('/update/:email', registrationController.update);
 router.post('/updateUser', registrationController.updateUser);
+
 router.get('/delete/:email', registrationController.delete);
 router.post('/deleteUser', registrationController.deleteUser);
 

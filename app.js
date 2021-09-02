@@ -28,8 +28,8 @@ database.connect((err) => {
     }
 })
 
-//setting the handlebars view enginer template
-app.set('veiw engine', 'hbs');
+//setting the handlebars view engineer template
+app.set('view engine', 'hbs');
 
 //Parse incoming request from json to string
 app.use(express.urlencoded({
