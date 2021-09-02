@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const cookie = require('cookie-parser');
 const hostname = 'localhost';
-const port = process.env.DATABASE_PORT || 4000;
+const port = 3000;
 
 //database configuration
 dotenv.config({
@@ -14,6 +14,7 @@ dotenv.config({
 const database = mysql.createConnection({
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USER,
+    port: process.env.DATABASE_PORT,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE
 });
@@ -24,7 +25,7 @@ database.connect((err) => {
         console.error('error connecting: ' + err.stack);
         return;
     } else {
-        console.log('mysql connected/app.js Line:25');
+        console.log('mysql connected/app.js Line:28');
     }
 })
 
