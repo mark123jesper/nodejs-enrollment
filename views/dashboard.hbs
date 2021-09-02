@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Dashboard</title>
+</head>
+
+<body class="container-fluid text center">
+    <h1>{{title}}</h1>
+    <div class="d-flex justify-content-end mb-3">
+        <a href='/'><button type="button" name="submit" id="submit" value="Submit" aria-describedby="Submit"
+                class="btn btn-danger">Sign out</button></a>
+    </div>
+    <div class="table-responsive-sm">
+        <table class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Student ID</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Year Level</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each student}}
+                <tr>
+                    <td>{{this.studentId}}</td>
+                    <td>{{this.fName}}</td>
+                    <td>{{this.mName}}</td>
+                    <td>{{this.lName}}</td>
+                    <td>{{this.address}}</td>
+                    <td>{{this.email}}</td>
+                    <td>{{this.contact}}</td>
+                    <td>{{this.yearLevel}}</td>
+                    <td>
+                        <a href="/auth/update/{{this.email}}" class="mx-1">
+                            <button type="button" class="btn btn-sm btn-primary">
+                                Update
+                            </button>
+                        </a>
+                        <a href="/auth/delete/{{this.email}}" class="mx-1">
+                            <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-center">
+        <a href='/auth/register'><button type="button" name="submit" id="submit" value="Submit"
+                aria-describedby="Submit" class="btn btn-primary">Register Student</button></a>
+    </div>
+
+</body>
+
+</html>

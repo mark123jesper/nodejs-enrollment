@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Edit User</title>
+</head>
+
+<body class="container">
+    <h1 class="text-center">{{title}}</h1>
+    <form action="/auth/deleteUser" method="POST">
+        <div class="row">
+            <div class="mb-3 col-lg-12">
+                <label for="studentId" class="form-label">User ID</label>
+                <input type="text" class="form-control" name="studentId" id="studentId" aria-describedby="Student Id"
+                    value={{student.studentId}} disabled>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="mb-3 col-lg-6">
+                <label for="fName" class="form-label">First Name</label>
+                <input type="text" class="form-control" name="fName" id="fName" aria-describedby="First Name"
+                    value={{student.fName}} readonly>
+            </div>
+
+            <div class="mb-3 col-lg-6">
+                <label for="lName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" name="lName" id="lName" aria-describedby="Last Name"
+                    value={{student.lName}} readonly>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="mb-3 col-lg-12">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="email" aria-describedby="email"
+                    value={{student.email}} readonly>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="mb-3 col-lg-12">
+                <label for="confirmUserId" class="form-label">Please Confirm your User ID</label>
+                <input type="text" class="form-control" name="confirmUserId" id="confirmUserId"
+                    aria-describedby="Confirm User ID">
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mb-3">
+            <button type="submit" name="submit" id="submit" value="Submit" aria-describedby="Submit"
+                class="btn btn-danger">Delete</button>
+        </div>
+
+        <div class="d-flex justify-content-center mb-3">
+            <a href='/auth/dashboard'><button type="button" name="submit" id="submit" value="Submit"
+                    aria-describedby="Submit" class="btn btn-secondary">Cancel</button></a>
+        </div>
+    </form>
+    {{#if message}}
+    <div class="mt-4 text-center d-flex justify-content-center">
+        <h5 class="alert alert-danger col-6">{{message}}</h5>
+    </div>
+    {{/if}}
+</body>
+
+</html>

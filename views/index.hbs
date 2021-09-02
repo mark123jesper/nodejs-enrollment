@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>SuperAdmin Login Page</title>
+</head>
+
+<body class="container">
+    <div class="row my-3 text-center">
+        <h1>SuperAdmin Login</h1>
+    </div>
+    <form class="row mb-3" action="/auth/" method="POST">
+        <div class="d-flex flex-column align-items-center">
+            <div class="mb-3 col-lg-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="email" aria-describedby="email"
+                    placeholder="email">
+            </div>
+
+            <div class="mb-3 col-lg-6">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password" aria-describedby="password"
+                    placeholder="password">
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button type="submit" name="submit" id="submit" value="Submit" aria-describedby="Submit"
+                class="btn btn-primary">Log In</button>
+        </div>
+    </form>
+    {{#if message}}
+    <div class="mt-4 text-center d-flex justify-content-center">
+        <h5 class="alert alert-danger col-6">{{message}}</h5>
+    </div>
+    {{/if}}
+</body>
+
+</html>
